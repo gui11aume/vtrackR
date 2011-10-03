@@ -1,8 +1,10 @@
-Package: HMMt
-Title: HMM with Student's t emissions
+Package: vtrackR
+Title: Version tracking for R production scripts.
 Version: 0.1
-Date: 2011-0617
+Date: 2011-10-03
 Author: Guillaume Filion
-Maintainer: Guillaume Filion <g.filion@nki.nl>
-Description: Provides HMM toolbox for t-distributed emissions.
+Maintainer: Guillaume Filion <guillaume.filion@gmail.com>
+Depends: digest
+Description: Generate headers for tracking the version of the script that produced a file, as well as the user, machine and environment.
 License: GPL (>=2)
+URL: https://github.com/g1illa1me/vtrackR
