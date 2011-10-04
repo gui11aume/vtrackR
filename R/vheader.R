@@ -1,6 +1,6 @@
 vheader <- function(call) {
 # Produce a header with version tracking information.
-# Invoke as 'header(match.call())' within a function and
+# Invoke as 'vheader(match.call())' within a function and
 # use output as header of output files.
 
   # Assert that the digest package is installed and loaded.
