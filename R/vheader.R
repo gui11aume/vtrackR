@@ -3,10 +3,11 @@ vheader <- function(call) {
 # Invoke as 'header(match.call())' within a function and
 # use output as header of output files.
 
-  # Turn off warnings for this function. Restore
-  # options upon exit.
+  # Assert that the digest package is installed and loaded.
+  stopifnot(require (digest));
+
+  # Restore warnings upon exit (will turn them off later).
   opt <- options();
-  options('warn' = -1);
   on.exit(options(opt));
 
   # Convert the call to characters. The called closure
@@ -20,6 +21,9 @@ vheader <- function(call) {
   # Gather base information.
   info <- list(
       "call" = deparse(call),
+      "platform" = paste(
+            Sys.info()[c("sysname", "nodename", "release")],
+            collapse = " ")
       "directory" = getwd(),
       "user" = Sys.info()[["login"]],
       "date" = strftime(Sys.time()),
@@ -27,10 +31,10 @@ vheader <- function(call) {
             R.version[c("major", "minor")],
             collapse = "."
       ),
-      "platform" = paste(
-            Sys.info()[c("sysname", "nodename", "release")],
-            collapse = " ")
   );
+
+  # Turn of warnings in what follows.
+  options('warn' = -1);
 
   try (
     # Skip if called closure is not in a package.
@@ -39,20 +43,14 @@ vheader <- function(call) {
       silent = TRUE
   );
 
-  got_require <- require (digest);
-  if (got_require) {
-    for (arg in args) {
-      try (
+  for (arg in args) {
+     try (
         # Add SHA1 digest if argument is named (otherwise skip).
         info[[paste(arg,"SHA1")]] <- digest(get(arg), "sha1"),
           silent = TRUE
-      );
-    }
-  } else {
-    # Don't have digest(), thus not continuing execution.
-    stop("Please install the 'digest' package before using vheader(). Thanks.")
+     );
   }
-
+  
   # Produce the header by pasting key/value pairs from 'info'.
   return (paste(
     sub("^", "# ", names(info)),
