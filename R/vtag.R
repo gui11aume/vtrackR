@@ -15,7 +15,7 @@ vtag <- function(...) {
   X <- list(...)$X;
 
   # Retrieve the parent call.
-  # TODO: check wht happens if it doesn't exist.
+  # TODO: check what happens if it doesn't exist.
   parent_call <- match.call(call=sys.call(sys.parent()));
 
   # Convert the parent call to characters. The called closure
@@ -48,7 +48,7 @@ vtag <- function(...) {
   ## Put SHA1 value of arguments in sub-list to avoid name collissions.
   info[["args"]] <- list();
 
-  # Turn of warnings in what follows.
+  # Turn off warnings in what follows.
   options('warn' = -1);
 
   for (arg in parent_args) {
