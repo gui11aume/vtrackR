@@ -23,7 +23,7 @@ vheader <- function(call) {
       "call" = deparse(call),
       "platform" = paste(
             Sys.info()[c("sysname", "nodename", "release")],
-            collapse = " ")
+            collapse = " "),
       "directory" = getwd(),
       "user" = Sys.info()[["login"]],
       "date" = strftime(Sys.time()),
