@@ -92,5 +92,3 @@ vtag <- function(...) {
    return(X)
 
 }
-
-
