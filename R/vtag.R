@@ -38,7 +38,6 @@ vtag <- function(...) {
 
    # Retrieve the parent call, ie the call to the function
    # where 'vtag()' is embedded.
-   # TODO: check wht happens if it doesn't exist.
    parent_call <- match.call(call=sys.call(sys.parent()));
    info[["call"]] <- deparse(parent_call);
 
