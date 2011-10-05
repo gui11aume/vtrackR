@@ -21,20 +21,8 @@ vtag <- function(...) {
    opt <- options();
    on.exit(options(opt));
 
-   
-   # Gather environment information.
-   info <- list(
-      "platform" = paste(
-            Sys.info()[c("sysname", "nodename", "release")],
-            collapse = " "),
-      "directory" = getwd(),
-      "user" = Sys.info()[["login"]],
-      "date" = strftime(Sys.time()),
-      "R version" = paste(
-            R.version[c("major", "minor")],
-            collapse = "."
-      )
-   );
+   # Obtain environment and session info
+   info <- vsessionInfo();
 
    # Retrieve the parent call, ie the call to the function
    # where 'vtag()' is embedded.
@@ -89,5 +77,6 @@ vtag <- function(...) {
    attr(X, "vtag") <- info;
 
    return(X)
-
 }
+
+
