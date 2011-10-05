@@ -14,11 +14,11 @@ vheader <- function(x, comment.char="#", extrafields="") {
       # Append a space after comment character (esthetics).
       comment.char <- paste(comment.char, " ", sep="");
    }
-   pairlist <- attr(x, "vtag")[[c(
-         "session",
-         "call",
-         "self SHA1",
-         extrafields)]];
+   pairlist <- attr(x, "vtag")[c(
+         "environment",
+         "context",
+         "self",
+         extrafields)];
    return (paste(collapse="",
       sapply(pairlist, FUN = function(pairs) {
          # Concatenate key/value pairs.

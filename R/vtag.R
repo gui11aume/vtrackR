@@ -18,13 +18,14 @@ vtag <- function(...) {
    opt <- options();
    on.exit(options(opt));
 
-   # Obtain environment and session info
+   # Obtain environment and session info.
    info <- vsessionInfo();
 
    # Retrieve the parent call, ie the call to the function
    # where 'vtag()' is embedded.
    parent_call <- match.call(call=sys.call(sys.parent()));
-   info[["call"]] <- deparse(parent_call);
+   info[["context"]] <- list();
+   info$context[["call"]] <- deparse(parent_call);
 
    # Convert the parent call to characters. The parent
    # function is in 'parent_args[1]', and its arguments in
@@ -36,7 +37,6 @@ vtag <- function(...) {
       pos=parent.frame())));
 
    # Put SHA1 of arguments in sub-list to avoid name collissions.
-   info[["args"]] <- list();
 
    # Turn off warnings in what follows.
    options('warn' = -1);
@@ -57,20 +57,20 @@ vtag <- function(...) {
             attr(arg_obj, "vtag") <- NULL;
          }
          # Calculate and add SHA1 digest.
-         info$args[[paste(arg,"SHA1")]] <- SHA1(arg_obj);
+         info$context[[paste(arg,"SHA1")]] <- SHA1(arg_obj);
       }
    }
 
    try (
       # Skip if called closure is not in a package.
-      info[[paste(package, "version")]] <-
+      info$context[[paste(package, "version")]] <-
           packageDescription(package)[["Version"]],
       silent = TRUE
    );
 
    # Add info as attribute (including SHA1 of X itself).
    if (!is.null(attributes(X)$vtag)) attr(X, "vtag") <- NULL;
-   info[["self SHA1"]] <- SHA1(X);
+   info[["self"]][["self SHA1"]] <- SHA1(X);
    attr(X, "vtag") <- info;
 
    return(X)
