@@ -2,9 +2,6 @@ vtag <- function(...) {
 # Add a 'vtag' attribute to an object. In function definitions,
 # replace 'return(x)' by 'return(vtag(X=x))'.
 
-   # Assert that the digest package is loaded.
-   stopifnot(require (digest));
-
    # Technical section to emulate the prototype 'vtag(X)'.
    if (length(list(...)) != 1) {
       stop('vtag takes exactly one argument');
@@ -60,7 +57,7 @@ vtag <- function(...) {
             attr(arg_obj, "vtag") <- NULL;
          }
          # Calculate and add SHA1 digest.
-         info$args[[paste(arg,"SHA1")]] <- digest(arg_obj, "sha1");
+         info$args[[paste(arg,"SHA1")]] <- SHA1(arg_obj);
       }
    }
 
@@ -73,7 +70,7 @@ vtag <- function(...) {
 
    # Add info as attribute (including SHA1 of X itself).
    if (!is.null(attributes(X)$vtag)) attr(X, "vtag") <- NULL;
-   info[["self SHA1"]] <- digest(X, "sha1");
+   info[["self SHA1"]] <- SHA1(X);
    attr(X, "vtag") <- info;
 
    return(X)
