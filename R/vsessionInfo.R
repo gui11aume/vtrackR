@@ -9,10 +9,7 @@ vsessionInfo <- function() {
       "directory" = getwd(),
       "user" = Sys.info()[["login"]],
       "date" = strftime(Sys.time()),
-      "sessionInfo" = paste(
-            R.version[c("major", "minor")],
-            collapse = "."
-      )
+      "sessionInfo" = sessionInfo()
    );
 
    return(info);
