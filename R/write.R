@@ -14,8 +14,7 @@ write <- function(x, file = "data",
       # Oops... Forgot to vtag the variable?
       warning('"x" has no vtag, writing session vheader');
       attr(x, "vtag") <- vsessionInfo();
-      attr(x, "vtag")[["args"]][["self SHA1"]] <-
-            digest(x, algo="sha1");
+      attr(x, "vtag")[["args"]][["self SHA1"]] <- SHA1(x);
    }
    # Now 'x' has a vtag, format a vheader and write.
    base::write(vheader(x), file=file, ncolumns=1,
