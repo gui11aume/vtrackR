@@ -3,9 +3,6 @@ vcheck <- function(X) {
 # Returns TRUE if the same, FALSE otherwise.
 # We may want to give a warning/error as well.
 
-   # Assert that the digest package is installed and loaded.
-   stopifnot(require (digest));
-
    # Restore warnings upon exit (will turn them off later).
    opt <- options();
    on.exit(options(opt));
@@ -19,7 +16,7 @@ vcheck <- function(X) {
       sha1_vtag <- attr(X, "vtag")[["self SHA1"]];
       # Erase vtag, as it modifies the SHA1 digest.
       attr(X, "vtag") <- NULL;
-      sha1_X <- digest(X, "sha1");
+      sha1_X <- SHA1(X);
       return(identical(sha1_vtag, sha1_X));
    }
 
