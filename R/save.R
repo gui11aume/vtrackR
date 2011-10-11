@@ -24,7 +24,7 @@ save <- function(..., list = character(),
    for (name in list) {
       if (is.null(attr(get(name), "vtag"))) {
          warning(paste(
-            "argument", name, "has no vtag: writig session vheader."
+            "argument", name, "has no vtag: writing session vheader."
          ));
          # Copy in this environment and vtag the object.
          assign(
