@@ -21,7 +21,9 @@ vtag <- function(...) {
    # where 'vtag()' is embedded.
    parent_call <- match.call(call=sys.call(sys.parent()));
    info[["context"]] <- list();
-   info$context[["call"]] <- deparse(parent_call);
+   # Deparse and prettify the call.
+   info$context[["call"]] <- sub("[[:space:]][[:space:]]*", " ",
+      paste(deparse(parent_call), collapse=""));
 
    # Convert the parent call to characters. The parent
    # function is in 'parent_args[1]', and its arguments in
