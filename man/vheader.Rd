@@ -5,14 +5,18 @@
    Produce a header for version tracking.
 }
 \usage{
-   vheader(call)
+   vheader(x, comment.char = "#", extrafields = "")
 }
 \arguments{
-   \item{call}{a \code{call} object.}
+   \item{x}{any R object with a vtag attribute.}
+   \item{comment.char}{a character to prepend to every line of thei
+      header.}
+   \item{extrafields}{a \code{character} vector with the names of 
+      the vtag fields to add to the vheader.}
 }
 \details{
-   The \code{vheader} function should always be used within a
-   function definition and always called as \code{vheader(match.call())}.
+   The \code{vheader} function is called by default in output
+   functions, such as \code{write}, \code{cat} and \code{write.table}.
 }
 \value{
    A string (character \code{vector} of length 1) with information
@@ -21,28 +25,11 @@
    version of the function's package and the SHA1 digests of all
    objects in the call (including the function itself).
 }
-\note{
-   The SHA1 digests are usually not the ones of the character
-   representations of the objects, but the SHA1 digests of the
-   objects as loaded in the R session. You can check the SHA1
-   digest of any object in the session by calling the \code{SHA1}
-   function.
-}
 \author{
-   Guillaume Filion <guillaume.filion@gmail.com>.
-}
-\seealso{
-   \code{\link{match.call}}, \code{\link{SHA1}} and the package
-   \code{digest} for the implementation of the SHA1 digest.
+   Guillaume Filion <guillaume.filion@gmail.com>, Wouter Meuleman.
 }
 \examples{
-# Insert in a function definition.
-f <- function(...) {
-   require(vtrackR);
-   cat(vheader(match.call()));
-}
-f();
-f(1, x="grand", y=sort);
+x <- vtag(1)
+cat(vheader(x))
 }
 \keyword{version}
-\keyword{call}

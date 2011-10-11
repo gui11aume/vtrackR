@@ -1,8 +1,8 @@
 Package: vtrackR
 Title: Version tracking for R production scripts.
-Version: 0.1
-Commit: 0.1-26-ge7b73a2
-Date: 2011-10-05
+Version: 0.2
+Commit: 0.1-28-g1ddb326
+Date: 2011-10-11
 Author: Guillaume Filion, Wouter Meuleman
 Maintainer: Guillaume Filion <guillaume.filion@gmail.com>
 Description: Generate headers for tracking the version of the script that produced a file, as well as the user, machine and environment.

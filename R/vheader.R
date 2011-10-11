@@ -8,8 +8,8 @@ vheader <- function(x, comment.char="#", extrafields="") {
       return(NULL);
    }
    
-   # The header should contain the fields from "session",
-   # "call", "self SHA1", and 'extrafields' if present.
+   # The header should contain the fields from "environment",
+   # "context", "self", and 'extrafields' if present.
    if (comment.char != "") {
       # Append a space after comment character (esthetics).
       comment.char <- paste(comment.char, " ", sep="");
@@ -18,7 +18,8 @@ vheader <- function(x, comment.char="#", extrafields="") {
          "environment",
          "context",
          "self",
-         extrafields)];
+         extrafields
+      )];
    return (paste(collapse="",
       sapply(pairlist, FUN = function(pairs) {
          # Concatenate key/value pairs.

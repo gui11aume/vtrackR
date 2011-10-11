@@ -14,10 +14,6 @@ vtag <- function(...) {
       stop('argument "X" is missing, with no default');
    }
 
-   # Restore warnings upon exit (will turn them off later).
-   opt <- options();
-   on.exit(options(opt));
-
    # Obtain environment and session info.
    info <- vsessionInfo();
 
@@ -38,15 +34,13 @@ vtag <- function(...) {
 
    # Put SHA1 of arguments in sub-list to avoid name collissions.
 
-   # Turn off warnings in what follows.
-   options('warn' = -1);
-
    for (arg in parent_args) {
       # Try to retrieve object FROM PARENT-OF-PARENT ENVIRONMENT. 
-      # Will (silently) fail if not properly named.
+      # Will (silently) fail if not properly named, e.g. positional
+      # data argument like in 'f(2)'.
       arg_obj <- NULL;
       try(
-          arg_obj <- get(arg, envir=parent.frame(n=2)),
+          expr = arg_obj <- get(arg, envir=parent.frame(n=2)),
           silent = TRUE
       );
 
@@ -61,12 +55,10 @@ vtag <- function(...) {
       }
    }
 
-   try (
-      # Skip if called closure is not in a package.
+   if (package != "R_GlobalEnv") {
       info$context[[paste(package, "version")]] <-
-          packageDescription(package)[["Version"]],
-      silent = TRUE
-   );
+         packageDescription(package)[["Version"]]
+   }
 
    # Add info as attribute (including SHA1 of X itself).
    if (!is.null(attributes(X)$vtag)) attr(X, "vtag") <- NULL;
@@ -75,5 +67,3 @@ vtag <- function(...) {
 
    return(X)
 }
-
-

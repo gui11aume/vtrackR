@@ -2,17 +2,20 @@
 \alias{SHA1}
 \title{SHA1 Digest R Objects}
 \description{
-   Compute the SHA1 digest of a object in the R session.
+   Compute the SHA1 digest of an object in the R session.
 }
 \usage{
-SHA1(obj, ...)
+SHA1(x, wo.vtag = TRUE)
 }
 \arguments{
-   \item{obj}{any R object.}
-   \item{...}{parameters passed to digest::digest.}
+   \item{x}{any R object.}
+   \item{wo.vtag}{Indicates whether the vtag should be removed before
+   computing the SHA1 digest.}
 }
 \details{
-   \code{SHA1} is a wrapper for \code{digest::digest(obj, algo="sha1")}.
+   For a \code{character} vector \code{x}, \code{SHA1(x)} is equivalent
+   to \code{digest::digest(x, algo="sha1", serialize=FALSE)}. For other
+   types, it is equivalent to \code{digest::digest(x, algo="sha1")}.
 }
 \value{
    The SHA1 digest is a 40-character string (character \code{vector}
@@ -37,10 +40,4 @@ SHA1(obj, ...)
 SHA1(as.integer(1));
 SHA1(as.double(1));
 SHA1(as.character(1));
-
-# Files have yet another representation.
-write(1, file="tmp.txt");
-SHA1(scan("tmp.txt", what=0));
-SHA1(scan("tmp.txt", what=""));
-SHA1("tmp.txt", file=TRUE);
 }
