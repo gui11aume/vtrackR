@@ -1,5 +1,5 @@
 The R package vtrackR provides a function to generate version tracking headers and a SHA1 digest algorithm.
 
-Please do not copy-paste the code. Instead, use 'git clone git@github.com:g1illa1me/vtrackR.git' to have the full version history.
+Please do not copy-paste the code. Instead, use 'git clone git@github.com:gui11aume/vtrackR.git' to have the full version history.
 
 The code is here for reproducibility and mistake-tracking purposes, but feel free to copy, reuse and modify it in any way you like.
