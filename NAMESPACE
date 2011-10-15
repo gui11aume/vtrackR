@@ -1,2 +1,2 @@
 useDynLib(vtrackR);
-export(vtag, vcheck, vheader, save, cat, write, write.table);
+export(vtag, SHA1, vcheck, vheader, save, cat, write, write.table);

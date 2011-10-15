@@ -60,6 +60,11 @@ vtag <- function(...) {
    if (package != "R_GlobalEnv") {
       info$context[[paste(package, "version")]] <-
          packageDescription(package)[["Version"]]
+      # Add the (git) revision info if present.
+      if (!is.null(packageDescription(package)[["Revision"]])) {
+         info$context[[paste(package, "revision")]] <-
+            packageDescription(package)[["Revision"]]
+      }
    }
 
    # Add info as attribute (including SHA1 of X itself).
