@@ -1,6 +1,6 @@
 write.table <- function(x, file = "", append = FALSE, quote = TRUE,
    sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE,
-   col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "") {
+   col.names = TRUE, qmethod = c("escape", "double"), ...) {
 
    passed <- list(
       quote = quote,
@@ -11,11 +11,11 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
       row.names = row.names,
       col.names = col.names,
       qmethod = qmethod,
-      fileEncoding = fileEncoding
+      ...
    );
 
-   if (append || file == "") {
-      # Just an append or a screen display: call 'utils::write()'.
+   if (append) {
+      # Just an append: call 'utils::write()'.
       do.call(
          utils::write.table,
          args=c(list(x=x, file=file, append=append), passed)

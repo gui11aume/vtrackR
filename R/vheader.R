@@ -11,7 +11,7 @@ vheader <- function(x, comment.char="#", extrafields="") {
    # The header should contain the fields from "environment",
    # "context", "self", and 'extrafields' if present.
    if (comment.char != "") {
-      # Append a space after comment character (esthetics).
+      # Append a space after comment character (for esthetics).
       comment.char <- paste(comment.char, " ", sep="");
    }
    pairlist <- attr(x, "vtag")[c(
@@ -20,6 +20,20 @@ vheader <- function(x, comment.char="#", extrafields="") {
          "self",
          extrafields
       )];
+
+   # Special treatment for the function source if present.
+   if (!is.null(pairlist$context[["function source"]])) {
+      # Prettify the code.
+      source <- paste("\n", paste(sub(
+            "^",
+            comment.char,
+            pairlist$context[["function source"]]
+         ),
+         collapse="\n"
+      ), sep = "");
+      pairlist$context[["function source"]] <- source;
+   }
+
    return (paste(collapse="",
       sapply(pairlist, FUN = function(pairs) {
          # Concatenate key/value pairs.

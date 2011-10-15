@@ -1,17 +1,17 @@
 vtag <- function(...) {
 # Add a 'vtag' attribute to an object. In function definitions,
-# replace 'return(x)' by 'return(vtag(X=x))'.
+# replace 'return(x)' by 'return(vtag(x))'.
 
-   # Technical section to emulate the prototype 'vtag(X)'.
+   # Technical section to emulate the prototype 'vtag(x)'.
    if (length(list(...)) != 1) {
       stop('vtag takes exactly one argument');
    }
    argname <- names(list(...));
-   if (is.null(argname) || argname == "X") {
-      X <- ..1;
+   if (is.null(argname) || argname == "x") {
+      x <- ..1;
    }
    else {
-      stop('argument "X" is missing, with no default');
+      stop('argument "x" is missing, with no default');
    }
 
    # Obtain environment and session info.
@@ -59,18 +59,25 @@ vtag <- function(...) {
 
    if (package != "R_GlobalEnv") {
       info$context[[paste(package, "version")]] <-
-         packageDescription(package)[["Version"]]
+         packageDescription(package)[["Version"]];
       # Add the (git) revision info if present.
       if (!is.null(packageDescription(package)[["Revision"]])) {
          info$context[[paste(package, "revision")]] <-
-            packageDescription(package)[["Revision"]]
+            packageDescription(package)[["Revision"]];
       }
    }
+   else {
+      # The function is not tracked. Copy the source.
+      info$context[["function source"]] <- attr(
+         get(parent_args[1], envir=parent.frame(n=2)),
+         "source"
+      );
+   }
 
-   # Add info as attribute (including SHA1 of X itself).
-   if (!is.null(attributes(X)$vtag)) attr(X, "vtag") <- NULL;
-   info[["self"]][["self SHA1"]] <- SHA1(X);
-   attr(X, "vtag") <- info;
+   # Add info as attribute (including SHA1 of x itself).
+   if (!is.null(attributes(x)$vtag)) attr(x, "vtag") <- NULL;
+   info[["self"]][["self SHA1"]] <- SHA1(x);
+   attr(x, "vtag") <- info;
 
-   return(X)
+   return(x);
 }

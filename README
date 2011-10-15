@@ -1,4 +1,6 @@
-The R package vtrackR provides a function to generate version tracking headers and a SHA1 digest algorithm.
+The R package vtrackR provides a function to generate version tracking headers and a SHA1 digest algorithm. The vtrackR package is best used by making it a default package. To do this, edit the $RHOME/etc/R/Renviron.site file and add the line:
+
+R_DEFAULT_PACKAGES='utils,grDevices,graphics,stats,vtrackR'
 
 Please do not copy-paste the code. Instead, use 'git clone git@github.com:gui11aume/vtrackR.git' to have the full version history.
 
