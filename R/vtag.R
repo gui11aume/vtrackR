@@ -58,11 +58,12 @@ vtag <- function(...) {
    }
 
    if (package != "R_GlobalEnv") {
-      info$context[[paste(package, "version")]] <-
+      info$context[["package"]] <- package;
+      info$context[["version"]] <-
          packageDescription(package)[["Version"]];
       # Add the (git) revision info if present.
       if (!is.null(packageDescription(package)[["Revision"]])) {
-         info$context[[paste(package, "revision")]] <-
+         info$context[["revision"]] <-
             packageDescription(package)[["Revision"]];
       }
    }
