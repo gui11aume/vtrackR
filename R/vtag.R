@@ -69,10 +69,8 @@ vtag <- function(...) {
    }
    else {
       # The function is not tracked. Copy the source.
-      info$context[["function source"]] <- attr(
-         get(parent_args[1], envir=parent.frame(n=2)),
-         "source"
-      );
+      info$context[["function source"]] <- 
+         deparse(body(fun=sys.function(sys.parent())));
    }
 
    # Add info as attribute (including SHA1 of x itself).
