@@ -2,6 +2,8 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
    sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE,
    col.names = TRUE, qmethod = c("escape", "double"), ...) {
 
+   isroot <- Sys.info()[["user"]] == "root";
+
    passed <- list(
       quote = quote,
       sep = sep,
@@ -14,8 +16,8 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
       ...
    );
 
-   if (append) {
-      # Just an append: call 'utils::write()'.
+   if (append || isroot) {
+      # Just an append or root: call 'utils::write()'.
       do.call(
          utils::write.table,
          args=c(list(x=x, file=file, append=append), passed)

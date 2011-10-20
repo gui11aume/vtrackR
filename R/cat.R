@@ -1,8 +1,12 @@
 cat <- function(..., file = "", sep = " ", fill = FALSE, labels = NULL,
       append = FALSE) {
+
+   isroot <- Sys.info()[["user"]] == "root";
+
    # Same prototype as 'base::cat()'.
-   if (append || file == "") {
-      # Just an append or a screen display: call 'base::write()'.
+   if (append || file == "" || isroot) {
+      # Just an append, a screen display, or root user:
+      # call 'base::write()'.
       base::cat(..., file=file, sep=sep, fill=fill, labels=labels,
             append=append);
    }

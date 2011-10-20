@@ -4,6 +4,8 @@ save <- function(..., list = character(),
    compress = !ascii, compression_level,
    eval.promises = TRUE, precheck = TRUE) {
 
+   isroot <- Sys.info()[["user"]] == "root";
+
    # Save prototype as base::save.
    passed <- list(
          file=file, ascii=ascii, version=version,
@@ -22,7 +24,7 @@ save <- function(..., list = character(),
    tmp.env <- new.env(parent=envir);
    # Create session vtags on the fly and warn if needed.
    for (name in list) {
-      if (is.null(attr(get(name), "vtag"))) {
+      if (is.null(attr(get(name), "vtag")) && !isroot) {
          warning(paste(
             "argument", name, "has no vtag: writing session vheader."
          ));
