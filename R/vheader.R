@@ -18,6 +18,7 @@ vheader <- function(x, comment.char="#", extrafields="") {
          "environment",
          "context",
          "self",
+         "comments", # Empty is not provided by user.
          extrafields
       )];
 

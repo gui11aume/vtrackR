@@ -17,6 +17,10 @@
 \details{
    The \code{vheader} function is called by default in output
    functions, such as \code{write}, \code{cat} and \code{write.table}.
+
+   the special \code{comments} meta-field of the \code{vtag} attribute
+   can be updated by the user to output additional comments in the
+   vheader of an file.
 }
 \value{
    A string (character \code{vector} of length 1) with information
@@ -30,6 +34,9 @@
 }
 \examples{
 x <- vtag(1)
+cat(vheader(x))
+
+attr(x, "vtag")[["comments"]][["foo"]] <- "bar"
 cat(vheader(x))
 }
 \keyword{version}
