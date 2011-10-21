@@ -22,7 +22,7 @@ vtag <- function(...) {
    parent_call <- match.call(call=sys.call(sys.parent()));
    info[["context"]] <- list();
    # Deparse and prettify the call.
-   info$context[["call"]] <- sub("[[:space:]][[:space:]]*", " ",
+   info$context[["call"]] <- gsub("[[:space:]][[:space:]]*", " ",
       paste(deparse(parent_call), collapse=""));
 
    # Convert the parent call to characters. The parent
