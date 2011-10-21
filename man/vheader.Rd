@@ -35,8 +35,5 @@
 \examples{
 x <- vtag(1)
 cat(vheader(x))
-
-attr(x, "vtag")[["comments"]][["foo"]] <- "bar"
-cat(vheader(x))
 }
 \keyword{version}
