@@ -1,6 +1,8 @@
 write <- function(x, file = "data",
    ncolumns = if (is.character(x)) 1 else 5,
-   append = FALSE, sep = " ") {
+   append = FALSE, sep = " ", ...) {
+
+# Extra parameters are passed to 'vheader(...)'.
 
    isroot <- Sys.info()[["user"]] == "root";
 
@@ -17,7 +19,7 @@ write <- function(x, file = "data",
          ));
       }
    }
-   base::cat(vheader(x), file=file);
+   base::cat(vheader(x, ...), file=file);
    # Port the wrapper from base package.
    base::cat(x, file = file, sep = c(rep.int(sep, ncolumns - 1), "\n"),
       append = TRUE);

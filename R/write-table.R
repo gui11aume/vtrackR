@@ -1,9 +1,13 @@
 write.table <- function(x, file = "", append = FALSE, quote = TRUE,
    sep = " ", eol = "\n", na = "NA", dec = ".", row.names = TRUE,
-   col.names = TRUE, qmethod = c("escape", "double"), ...) {
+   col.names = TRUE, qmethod = c("escape", "double"), fileEncoding,
+   ...) {
+
+# Extra parameters are passed to 'vheader(...)'.
 
    isroot <- Sys.info()[["user"]] == "root";
 
+   # Arguments priori to R version 2.13.
    passed <- list(
       quote = quote,
       sep = sep,
@@ -12,9 +16,12 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
       dec = dec,
       row.names = row.names,
       col.names = col.names,
-      qmethod = qmethod,
-      ...
+      qmethod = qmethod
    );
+   # Argument added in R version 2.13.
+   if (!missing(fileEncoding)) {
+      passe[["fileEncoding"]] <- fileEncoding;
+   }
 
    if (append || isroot) {
       # Just an append or root: call 'utils::write()'.
@@ -39,7 +46,7 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
          }
       }
       # Now 'x' has a vtag, format a vheader and write.
-      base::cat(vheader(x), file=file)
+      base::cat(vheader(x, ...), file=file)
 
       # And finally write 'x'...
       # ... but this will trigger a warning that we need to catch.

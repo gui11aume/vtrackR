@@ -1,9 +1,10 @@
 cat <- function(x, file = "", sep = " ", fill = FALSE, labels = NULL,
-      append = FALSE) {
+      append = FALSE, ...) {
+
+# Extra paramters are passed to 'vheader(...)'.
 
    isroot <- Sys.info()[["user"]] == "root";
 
-   # Same prototype as 'base::cat()'.
    if (append || file == "" || isroot) {
       # Just an append, a screen display, or root user:
       # call 'base::write()'.
@@ -26,7 +27,7 @@ cat <- function(x, file = "", sep = " ", fill = FALSE, labels = NULL,
          }
       }
       # Now 'x' has a vtag, format a vheader and write.
-      base::cat(vheader(x), file=file, sep=sep, fill=fill,
+      base::cat(vheader(x, ...), file=file, sep=sep, fill=fill,
          labels=labels, append=append);
       
       # And finally write 'x'.

@@ -6,12 +6,13 @@ save <- function(..., list = character(),
 
    isroot <- Sys.info()[["user"]] == "root";
 
-   # Save prototype as base::save.
+   # Arguments prior to R version 2.13.
    passed <- list(
          file=file, ascii=ascii, version=version,
          compress=compress,
          eval.promises=eval.promises, precheck=precheck
    );
+   # Argument added in R version 2.13.
    if (!missing(compression_level)) {
       passed[["compression_level"]] <- compression_level;
    }
