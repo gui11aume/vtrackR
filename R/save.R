@@ -28,12 +28,16 @@ save <- function(..., list = character(),
          warning(paste(
             "argument", name, "has no vtag: writing session vheader."
          ));
+         info <- vsessionInfo();
+         # Add relevant history.
+         info[["comments"]] <- list();
+         info[["comments"]][["history"]] <- relevanthistory(name);
          # Copy in this environment and vtag the object.
          assign(
             name,
-            "attr<-"(get(name), "vtag", vsessionInfo()),
+            "attr<-"(get(name), "vtag", info),
             envir = tmp.env
-            );
+         );
       }
    }
 

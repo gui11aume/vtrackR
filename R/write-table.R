@@ -32,9 +32,9 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
          attr(x, "vtag")[["self"]][["self SHA1"]] <- SHA1(x);
          x.arg <- as.list(match.call())$x;
          if (is.symbol(x.arg)) {
-            addcomment(x, "history",
-                  paste(relevanthistory(as.character(x.arg)),
-                         collapse = "; "
+            addcomment(x, "history", paste(
+               relevanthistory(as.character(x.arg)),
+               collapse = "; "
             ));
          }
       }
