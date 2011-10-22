@@ -30,6 +30,10 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
          warning('"x" has no vtag, writing session vheader');
          attr(x, "vtag") <- vsessionInfo();
          attr(x, "vtag")[["self"]][["self SHA1"]] <- SHA1(x);
+         x.arg <- as.list(match.call())$x;
+         if (is.symbol(x.arg)) {
+            addcomment(x, "history", relevanthistory(as.character(x)));
+         }
       }
       # Now 'x' has a vtag, format a vheader and write.
       base::cat(vheader(x), file=file)
