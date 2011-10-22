@@ -11,7 +11,7 @@ vtag <- function(x) {
 
    info[["context"]] <- list();
    # Deparse and prettify the call.
-   info$context[["call"]] <- sub("[[:space:]][[:space:]]*", " ",
+   info$context[["call"]] <- gsub("[[:space:]][[:space:]]*", " ",
       paste(deparse(parent_call), collapse=""));
 
    # The parent function is in 'parent_args[1]', and its
