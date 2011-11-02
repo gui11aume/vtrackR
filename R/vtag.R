@@ -51,6 +51,10 @@ vtag <- function(x) {
    # Add info as attribute (including SHA1 of x itself).
    info[["self"]][["self SHA1"]] <- SHA1(x);
 
+   # Collect history.
+   info[["history"]][["full"]] <- gethistory();
+
+
    attr(x, "vtag") <- info;
 
    return(x);
