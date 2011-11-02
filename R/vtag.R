@@ -1,4 +1,4 @@
-vtag <- function(x) {
+vtag <- function(x, ...) {
 # Add a 'vtag' attribute to an object. In function definitions,
 # replace 'return(x)' by 'return(vtag(x))'.
 
