@@ -32,12 +32,9 @@ SHA1(x, wo.vtag = TRUE)
    The SHA1 digest is computed from the objects as they are loaded in
    memory, and not from their character representation.
 }
-\seealso{
-   \code{\link{digest::digest}}
-}
 \examples{
 # Different representations have different SHA1 digest.
-SHA1(as.integer(1));
-SHA1(as.double(1));
-SHA1(as.character(1));
+SHA1(as.integer(1))
+SHA1(as.double(1))
+SHA1(as.character(1))
 }
