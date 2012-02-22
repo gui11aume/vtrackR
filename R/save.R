@@ -25,7 +25,7 @@ save <- function(..., list = character(),
    tmp.env <- new.env(parent=envir);
    # Create session vtags on the fly and warn if needed.
    for (name in list) {
-      if (is.null(attr(get(name), "vtag")) && !isroot) {
+      if (is.null(attr(get(name, envir=envir), "vtag")) && !isroot) {
          warning(paste(
             "argument", name, "has no vtag: writing session vheader."
          ));
@@ -33,7 +33,7 @@ save <- function(..., list = character(),
          # Copy in this environment and vtag the object.
          assign(
             name,
-            "attr<-"(get(name), "vtag", info),
+            "attr<-"(get(name, envir=envir), "vtag", info),
             envir = tmp.env
          );
       }
