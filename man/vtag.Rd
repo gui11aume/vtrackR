@@ -30,7 +30,7 @@ y <- f(3)
 y
 vcheck(y)
 write(y, file='tmp.txt')
-readLines(file='tmp.txt')
+readLines('tmp.txt')
 }
 \keyword{vtag}
 \keyword{attribute}
