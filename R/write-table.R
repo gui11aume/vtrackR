@@ -20,7 +20,7 @@ write.table <- function(x, file = "", append = FALSE, quote = TRUE,
    );
    # Argument added in R version 2.13.
    if (!missing(fileEncoding)) {
-      passe[["fileEncoding"]] <- fileEncoding;
+      passed[["fileEncoding"]] <- fileEncoding;
    }
 
    if (append || isroot) {
