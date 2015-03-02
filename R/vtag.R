@@ -52,7 +52,8 @@ vtag <- function(x, ...) {
    info[["self"]][["self SHA1"]] <- SHA1(x);
 
    # Collect history.
-   info[["history"]][["full"]] <- gethistory();
+   info[["history"]][["full"]] <- "";
+   try(info[["history"]][["full"]] <- gethistory(), silent=TRUE);
 
 
    attr(x, "vtag") <- info;
